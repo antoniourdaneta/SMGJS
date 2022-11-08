@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Asociación - SMG</title>
+    <title>Cotizador - SMG</title>
     <!-- BOOTSTRAP -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
@@ -35,7 +35,7 @@
               alt="logotipo_SMG"
           /></a>
           <a href="../index.html"
-            ><h1 class="tituloPrincipal">Asociación</h1></a
+            ><h1 class="tituloPrincipal">Cotizador</h1></a
           >
           <button
             class="navbar-toggler"
@@ -79,7 +79,7 @@
                     class="nav-link active"
                     aria-current="page"
                     href="asociacion.html"
-                    >Asociación</a
+                    >Cotizador</a
                   >
                 </li>
                 <li class="nav-item dropdown">
@@ -125,59 +125,16 @@
     </header>
 
     <main>
-      <h3 class="subtituloFormulario">¡Conviértete en Socio/a!</h3>
+      <h3 class="subtituloFormulario">
+        Planes Médicos - ¡Conviértete en Socio/a!
+      </h3>
 
-      <form
-        class="formularioContacto bordesFormularios animate__animated animate__flipInY animate__slow"
-      >
-        <label
-          for="exampleFormControlTextarea1"
-          class="form-label comentarioFormularios"
-          >Déjanos tus datos y te contactaremos en breve</label
-        >
-        <div class="form-floating margenesSecundarios">
-          <input
-            type="text"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Nombre y Apellido"
-          />
-          <label for="floatingPassword">Nombre y Apellido</label>
-        </div>
-        <div class="form-floating margenesSecundarios">
-          <input
-            type="text"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Edad"
-          />
-          <label for="floatingPassword">Edad</label>
-        </div>
-        <div class="form-floating margenesSecundarios">
-          <input
-            type="text"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Teléfono Celular"
-          />
-          <label for="floatingPassword">Teléfono Celular</label>
-        </div>
-        <div class="form-floating margenesSecundarios">
-          <input
-            type="text"
-            class="form-control"
-            id="floatingPassword"
-            placeholder="Correo Electrónico"
-          />
-          <label for="floatingPassword">Correo Electrónico</label>
-        </div>
-        <button type="submit" class="btn btn-light margenesSecundarios">
-          Enviar
-        </button>
-        <button type="reset" class="btn btn-light margenesSecundarios">
-          Restablecer
-        </button>
-      </form>
+      <!-- PLANES MÉDICOS -->
+      <h4>
+        <button class="navbar-brand" id="identificarse">¡Identifícate!</button>
+      </h4>
+
+      <div id="planes" class="col"></div>
     </main>
 
     <footer class="alineadoCentro">
@@ -200,5 +157,6 @@
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
       crossorigin="anonymous"
     ></script>
+    <script src="../simuladorsmg.js"></script>
   </body>
 </html>

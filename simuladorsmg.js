@@ -94,50 +94,200 @@ cotizarPlanMedico();
 
 //Lista de planes médicos
 
+const cotizador = [];
 const planesSMG = [
-  { id: 01,
+  {
+    id: 01,
     nombre: "PlanSMG 01",
-    ubicación: "Sanatorio SMG",
-    precio: 58000,
+    ubicacion: "Sanatorio SMG",
+    preciodelista: 58000,
+    img: "../multimedia/LOGOTIPOSMG2.jpg",
   },
-  { id: 02,
+  {
+    id: 02,
     nombre: "PlanSMG 02",
-    ubicación: "Sanatorio SMG",
-    precio: 62000,
+    ubicacion: "Sanatorio SMG",
+    preciodelista: 62000,
+    img: "../multimedia/LOGOTIPOSMG2.jpg",
   },
-  { id: 03,
+  {
+    id: 03,
     nombre: "PlanSMG 03",
-    ubicación: "Sanatorio SMG",
-    precio: 79000,
+    ubicacion: "Sanatorio SMG",
+    preciodelista: 79000,
+    img: "../multimedia/LOGOTIPOSMG2.jpg",
   },
-  { id: 04,
+  {
+    id: 04,
     nombre: "PlanSMG 04",
-    ubicación: "Sanatorio SMG",
-    precio: 88000,
+    ubicacion: "Sanatorio SMG",
+    preciodelista: 88000,
+    img: "../multimedia/LOGOTIPOSMG2.jpg",
   },
-  { id: 05,
+  {
+    id: 05,
     nombre: "PlanSMG 01 - Exclusive",
-    ubicación: "Sanatorio SMG Exclusive",
-    precio: 128000,
+    ubicacion: "Sanatorio SMG Exclusive",
+    preciodelista: 128000,
+    img: "../multimedia/LOGOTIPOSMG2.jpg",
   },
-  { id: 06,
+  {
+    id: 06,
     nombre: "PlanSMG 02 - Exclusive",
-    ubicación: "Sanatorio SMG Exclusive",
-    precio: 142000,
+    ubicacion: "Sanatorio SMG Exclusive",
+    preciodelista: 142000,
+    img: "../multimedia/LOGOTIPOSMG2.jpg",
   },
-  { id: 07,
+  {
+    id: 07,
     nombre: "PlanSMG 03 - Exclusive",
-    ubicación: "Sanatorio SMG Exclusive",
-    precio: 167000,
+    ubicacion: "Sanatorio SMG Exclusive",
+    preciodelista: 167000,
+    img: "../multimedia/LOGOTIPOSMG2.jpg",
   },
-  { id: 08,
+  {
+    id: 08,
     nombre: "PlanSMG 04 - Exclusive",
-    ubicación: "Sanatorio SMG Exclusive",
-    precio: 188000,
+    ubicacion: "Sanatorio SMG Exclusive",
+    preciodelista: 188000,
+    img: "../multimedia/LOGOTIPOSMG2.jpg",
   },
 ];
 
-console.log("Bienvenido/a a Smart Medical Group. A continuación te dejamos un listado de nuestros planes médicos en cartilla para que puedas seleccionar el que más se adecúe a tus necesidades. Estos valores no poseen el IVA agregado.");
+//Funciones
+//Función para identificarse
+
+function identificacion() {
+  localStorage.setItem(
+    "usuario",
+    prompt("Hola, bienvenido, ¿puede indicarnos su nombre?")
+  );
+}
+
+// Función para cotizar el plan médico
+function item(nombre, id, preciodelista) {
+  (this.nombre = prompt("Inserta el nombre del Plan Médico: ", nombre)),
+    (this.id = prompt("Ingresa el ID del Plán Médico: ", id)),
+    (this.preciodelista = parseFloat(
+      prompt("Introduce el precio de lista del plan: ", preciodelista)
+    ));
+}
+
+let planesMedicos = document.getElementById("planes");
+function mostrador() {
+  for (const plan of planesSMG) {
+    planesMedicos.className = "card";
+    planesMedicos.innerHTML += `
+        <section class="container">
+        <div class="card a2 botones contenedorPlanes">
+          <img
+            src="${plan.img}"
+            class="card-img-top"
+            alt="${plan.nombre}"
+          />
+            <div class="card-body">
+              <h4 class="card-title">${plan.nombre}</h4>
+              <h5>Precio de lista: $${plan.preciodelista}</h5>
+      
+              <button
+                type="button"
+                class="btn btn-primary fondoBoton botones2"
+                data-bs-toggle="modal"
+                data-bs-target="#p1${plan.id}"
+              >
+                Agregar al cotizador
+              </button>
+              </section>
+      
+              <!-- despliegue del cuadro flotante -->
+              <div
+                class="modal fade"
+                id="p1${plan.id}"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        Cotizar
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close fondoBoton"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <img
+                        src="${plan.img}"
+                        class="card-img-top"
+                        alt="${plan.nombre}"
+                      />
+                      <h4 class="card-title">${plan.nombre}</h4>
+                      <h5>$ ${plan.preciodelista}</h5>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary fondoBoton botones2"
+                        data-bs-dismiss="modal"
+                      >
+                        Cancelar
+                      </button>
+                      <button id='AC${plan.id}' type="button" class="btn btn-primary fondoBoton">
+                        Cotizar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+        `;
+  }
+
+  planesSMG.forEach((plan) => {
+    document
+      .getElementById(`AC${plan.id}`)
+      .addEventListener("click", function () {
+        agregarAlCotizador(plan);
+      });
+  });
+}
+
+//Función para agregar al cotizador
+function agregarAlCotizador(planAgregadoAlCotizador) {
+  if (
+    (localStorage.getItem("usuario") === "null") |
+    (localStorage.getItem("usuario") === "")
+  ) {
+    localStorage.setItem(
+      "usuario",
+      prompt("Hola, bienvenido, ¿puede indicarnos su nombre?")
+    );
+  } else {
+    cotizador.push(planAgregadoAlCotizador);
+    console.table(cotizador);
+    alert(
+      "Se agrego el " +
+        planAgregadoAlCotizador.nombre +
+        " al cotizador de Planes Médicos SMG, ¡muchas gracias " +
+        localStorage.getItem("usuario") +
+        "!"
+    );
+  }
+}
+
+mostrador();
+
+identificarse.onclick = () => {
+  identificacion();
+};
+
+/*console.log("Bienvenido/a a Smart Medical Group. A continuación te dejamos un listado de nuestros planes médicos en cartilla para que puedas seleccionar el que más se adecúe a tus necesidades. Estos valores no poseen el IVA agregado.");
 console.table(planesSMG);
 
 let planId = prompt ("Por favor, introduzca el número de ID del plan médico de su preferencia.");
@@ -174,4 +324,4 @@ if (modoDePago == "de contado"){
   console.table(planEscogido);
 }else{
   console.log("No ha escogido una de las modalidades predefinidas para el cotizador. Por favor reintente de nuevo con las opciones 'de contado' o 'cuotas'. Muchas gracias.")
-}
+}*/
